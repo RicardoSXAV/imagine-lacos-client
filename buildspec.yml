@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - npm install -g typescript
+  pre_build:
+    commands:
+      - echo Installing packages
+      - npm install
+  build:
+    commands:
+      - echo Creating build
+      - npm run build
+  post_build:
+    commands:
+      - echo Build completed
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: no
+  base-directory: build
