@@ -8,7 +8,7 @@ function PopupError(props) {
       <div className="popup-error-box">
         <div className="close-line">
           <Icon
-            name="x-button.png"
+            iconSrc="xButton"
             id="popup-error-x-button"
             onClick={() => props.setErrorMessage("")}
           />

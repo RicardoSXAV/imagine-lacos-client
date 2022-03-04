@@ -46,7 +46,7 @@ function Administrador(props) {
                     })
                   }
                 />
-                <Image name="camera.png" />
+                <Image imageSrc="camera" />
               </button>
             )}
             <div className="flex-column-wrapper">
@@ -67,13 +67,13 @@ function Administrador(props) {
             <div className="admin-options-icons">
               <div className="flex-wrapper-column">
                 <div className="admin-options-icon-box">
-                  <Image name="users-avatar.png" />
+                  <Image imageSrc="usersAvatar" />
                 </div>
                 <h3>Usuários</h3>
               </div>
               <div className="flex-wrapper-column">
                 <div className="admin-options-icon-box">
-                  <Image name="tools.png" />
+                  <Image imageSrc="tools" />
                 </div>
                 <h3>Ajustes</h3>
               </div>

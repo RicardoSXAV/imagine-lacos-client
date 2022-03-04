@@ -28,7 +28,7 @@ function Pagination(props) {
     props.currentPage > arrayOfPages[4] &&
     arrayOfPages[5] < props.totalPages - 1
   ) {
-    let auxiliaryArray1 = [...arrayOfPages];
+    const auxiliaryArray1 = [...arrayOfPages];
 
     arrayOfPages = [];
 
@@ -48,7 +48,7 @@ function Pagination(props) {
   }
 
   if (props.currentPage < arrayOfPages[2] && arrayOfPages[2] !== 3) {
-    let auxiliaryArray2 = [...arrayOfPages];
+    const auxiliaryArray2 = [...arrayOfPages];
 
     arrayOfPages = [];
 
@@ -68,7 +68,7 @@ function Pagination(props) {
       <div className="pagination-box">
         {width > 820 ? (
           <Icon
-            name="prev-button.png"
+            iconSrc="prevButton"
             id="prev-button-pagination"
             onClick={() => {
               props.currentPage > 1 &&
@@ -112,7 +112,7 @@ function Pagination(props) {
 
         {width > 820 ? (
           <Icon
-            name="next-button.png"
+            iconSrc="nextButton"
             id="next-button-pagination"
             onClick={() => {
               props.currentPage < props.totalPages &&

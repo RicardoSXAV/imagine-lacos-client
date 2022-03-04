@@ -21,7 +21,7 @@ function CreditCardForm(props) {
       <div className="form-box" {...props}>
         <h1 className="form-title">{props.title}</h1>
         <Icon
-          name="x-button.png"
+          iconSrc="xButton"
           id="form-x-button"
           onClick={() => props.setShowWindow(false)}
         />
@@ -52,7 +52,7 @@ function CreditCardForm(props) {
             onChange={(event) => setCvv(event.target.value)}
           />
 
-          <Image name="cloud-with-tie.png" />
+          <Image imageSrc="cloudWithTie" />
         </div>
 
         <div className="form-buttons">

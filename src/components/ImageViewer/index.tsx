@@ -26,7 +26,7 @@ function ImageViewer(props) {
         style={focusMode ? { display: "block" } : { display: "none" }}
       >
         <Icon
-          name="x-button.png"
+          iconSrc="xButton"
           id="image-viewer-focus-close"
           onClick={() => setFocusMode("")}
         />
@@ -35,7 +35,7 @@ function ImageViewer(props) {
       </div>
       <div className="image-viewer">
         <Icon
-          name="prev-button.png"
+          iconSrc="prevButton"
           id="image-viewer-prev-button"
           onClick={scrollLeft}
         />
@@ -47,7 +47,7 @@ function ImageViewer(props) {
           ))}
         </div>
         <Icon
-          name="next-button.png"
+          iconSrc="nextButton"
           id="image-viewer-next-button"
           onClick={scrollRight}
         />

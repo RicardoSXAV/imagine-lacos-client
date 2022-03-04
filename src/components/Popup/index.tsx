@@ -12,7 +12,7 @@ function Popup(props) {
       >
         <div className="popup-window" {...props}>
           <Icon
-            name="x-button.png"
+            iconSrc="xButton"
             id="popup-x-button"
             onClick={() => props.setShowPopup(false)}
           />

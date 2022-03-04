@@ -4,7 +4,7 @@ import Image from "../Image";
 
 function OrderView(props) {
   const paymentIcon = {
-    "credit-card": <Image name="credit-card.png" id="order-payment-icon" />,
+    "credit-card": <Image imageSrc="creditCard" id="order-payment-icon" />,
   };
 
   const paymentStatus = {
@@ -17,7 +17,7 @@ function OrderView(props) {
         {props.clientImage ? (
           <img src={props.clientImage} className="order-view-client-image" />
         ) : (
-          <Image name="user-avatar.svg" className="order-view-client-image" />
+          <Image imageSrc="userAvatar" className="order-view-client-image" />
         )}
         <div className="information-column">
           <h1 className="order-view-client">{props.clientName}</h1>
@@ -36,7 +36,7 @@ function OrderView(props) {
               )}
             </div>
             <Icon
-              name="list-button.png"
+              iconSrc="listButton"
               id="order-view-list-button"
               onClick={() => props.showOrderDetails(props.postalInformation)}
             />

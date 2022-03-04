@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import Icon from "../../Icon";
 import Image from "../../Image";
-import Carousel from "../../UI/Carousel";
+import Carousel from "../Carousel";
 
 function Input(props) {
   // type = select
@@ -92,14 +92,14 @@ function Input(props) {
             ref={selectRef}
             {...props}
           >
-            <Icon name="arrow-down.svg" id="input-select-icon" />
+            <Icon iconSrc="arrowDown" id="input-select-icon" />
             {props.placeholder}: <p>{props.selectedOption}</p>
             {props.selectWithImages && (
               <div
                 className="input-select-image-box"
                 style={{ background: props.selectWithImages?.background }}
               >
-                <Image name={optionImageName} />
+                <Image src={optionImageName} />
               </div>
             )}
             <div className="input-select-options">
@@ -110,7 +110,7 @@ function Input(props) {
                       className="select-option"
                       onClick={(event) =>
                         selectOption(
-                          event.target.innerText,
+                          option,
                           props.selectWithImages?.imagesName[index]
                         )
                       }
@@ -127,7 +127,7 @@ function Input(props) {
       return (
         <div className="input-password">
           <Icon
-            name="eye.svg"
+            iconSrc="eye"
             id={`${
               showPassword
                 ? "input-password-icon-active"
@@ -151,7 +151,7 @@ function Input(props) {
             {image ? (
               <>
                 <Icon
-                  name="x-button.png"
+                  iconSrc="xButton"
                   id="input-image-delete-button"
                   onClick={() => setImage("")}
                 />
@@ -166,7 +166,7 @@ function Input(props) {
                   accept=".png, .jpg, .jpeg"
                   onChange={handleInputImageChange}
                 />
-                <Image name="photos.svg" />
+                <Image imageSrc="photos" />
                 <p className="image-area-description">
                   Clique nesta área para adicionar uma imagem
                 </p>
@@ -189,7 +189,7 @@ function Input(props) {
                   multiple
                   onChange={handleInputImagesChange}
                 />
-                <Image name="photos.svg" />
+                <Image imageSrc="photos" />
                 <p className="image-area-description">
                   Clique nesta área para selecionar as imagens
                 </p>
@@ -199,7 +199,7 @@ function Input(props) {
 
           {images?.map((img) => {
             const preview = URL.createObjectURL(img);
-            return <Image path={preview} />;
+            return <Image src={preview} />;
           })}
         </>
       );
@@ -213,7 +213,7 @@ function Input(props) {
       return (
         <div className="input-step-number" {...props}>
           <Icon
-            name="minus-button.png"
+            iconSrc="minusButton"
             onClick={() => {
               if (numberValue > props.min) {
                 setNumberValue(numberValue - props.step);
@@ -222,7 +222,7 @@ function Input(props) {
           />
           <p>{numberValue}</p>
           <Icon
-            name="plus-button.png"
+            iconSrc="plusButton"
             onClick={() => {
               if (numberValue < props.max) {
                 setNumberValue(numberValue + props.step);

@@ -2,7 +2,7 @@ import "./globalStyles.scss";
 
 import { useEffect, useState } from "react";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
-import axios from "axios";
+import { api } from "./services/api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import { useSessionStorage } from "./hooks/useSessionStorage";
@@ -84,8 +84,8 @@ function App() {
   useEffect(() => {
     if (categoryList.length === 0) {
       async function getCategories() {
-        await axios
-          .get("http://localhost:5000/api/category")
+        await api
+          .get("/category")
           .then((response) => setCategoryList(response.data.categoryList));
       }
       getCategories();
@@ -93,8 +93,8 @@ function App() {
 
     if (productList.length === 0) {
       async function getProducts() {
-        await axios
-          .get(`http://localhost:5000/api/product?recent=true`)
+        await api
+          .get(`/product?recent=true`)
           .then((response) => {
             setProductList(response.data.events);
             setPaginationInfo({
@@ -108,8 +108,8 @@ function App() {
 
     if (JSON.stringify(userData) === "{}" && loadUserError === false) {
       async function getUser() {
-        await axios
-          .get("http://localhost:5000/api/user")
+        await api
+          .get("/user")
           .then((response) => setUserData(response.data))
           .catch((error) => {
             console.log(error.response);
@@ -125,10 +125,8 @@ function App() {
   useEffect(() => {
     if (paginationActive) {
       async function getProducts() {
-        await axios
-          .get(
-            `http://localhost:5000/api/product?page=${currentProductPage}&recent=true`
-          )
+        await api
+          .get(`/product?page=${currentProductPage}&recent=true`)
           .then((response) => {
             setProductList(response.data.events);
             setPaginationInfo({
@@ -153,9 +151,9 @@ function App() {
 
   async function getCategoryProducts(categoryName) {
     if (filteredProductList.length === 0) {
-      await axios
+      await api
         .get(
-          `http://localhost:5000/api/product?category=${categoryName}&page=${currentCategoryProductPage}`
+          `/product?category=${categoryName}&page=${currentCategoryProductPage}`
         )
         .then((response) => {
           console.log(response.data);
@@ -171,8 +169,8 @@ function App() {
   // User
 
   async function registerUser(object) {
-    await axios
-      .post("http://localhost:5000/api/user/register", object)
+    await api
+      .post("/user/register", object)
       .then((response) => console.log(response))
       .catch((error) => {
         setErrorMessage(error.response.data.message);
@@ -181,8 +179,8 @@ function App() {
   }
 
   async function loginUser(object) {
-    await axios
-      .post("http://localhost:5000/api/user/login", object)
+    await api
+      .post("/user/login", object)
       .then((response) => {
         setUserData(response.data);
         setLoadUserError(false);
@@ -198,8 +196,8 @@ function App() {
     const profileObj = res?.profileObj;
     const tokenId = res?.tokenId;
 
-    await axios
-      .post("http://localhost:5000/api/user/login-google", {
+    await api
+      .post("/user/login-google", {
         tokenId,
         profileObj,
       })
@@ -212,8 +210,8 @@ function App() {
   }
 
   async function logoutUser() {
-    await axios
-      .get("http://localhost:5000/api/user/logout")
+    await api
+      .get("/user/logout")
       .then(() => {
         setUserData({});
         setLoadUserError(false);
@@ -223,8 +221,8 @@ function App() {
   }
 
   async function updateUserInformation(object) {
-    await axios
-      .patch("http://localhost:5000/api/user", object)
+    await api
+      .patch("/user", object)
       .then((response) => {
         setUserData(response.data);
       })
@@ -235,8 +233,8 @@ function App() {
     const data = new FormData();
     data.append("profileImage", object.profileImage);
 
-    await axios
-      .patch("http://localhost:5000/api/user/profile-image", data)
+    await api
+      .patch("/user/profile-image", data)
       .then((response) => {
         setUserData(response.data);
       })
@@ -246,9 +244,7 @@ function App() {
   // Category
 
   async function getCategoryProductsCount(id) {
-    const response = await axios.get(
-      "http://localhost:5000/api/category/count/" + id
-    );
+    const response = await api.get("/category/count/" + id);
     return response.data.countProducts;
   }
 
@@ -257,8 +253,8 @@ function App() {
     data.append("name", object.categoryName);
     data.append("image", object.categoryImage);
 
-    await axios
-      .post("http://localhost:5000/api/category", data)
+    await api
+      .post("/category", data)
       .then((response) =>
         setCategoryList([...categoryList, response.data.object])
       )
@@ -268,8 +264,8 @@ function App() {
   }
 
   async function deleteCategory(id) {
-    await axios
-      .delete("http://localhost:5000/api/category/" + id)
+    await api
+      .delete("/category/" + id)
       .then((response) => console.log(response))
       .catch((error) => {
         console.log(error.response);
@@ -282,9 +278,9 @@ function App() {
   // Product
 
   async function updateProductList(productsFilter) {
-    await axios
+    await api
       .get(
-        `http://localhost:5000/api/product?page=${currentProductPage}${
+        `/product?page=${currentProductPage}${
           productsFilter === "Recentes" && "&recent=true"
         }`
       )
@@ -309,8 +305,8 @@ function App() {
       data.append("images", file)
     );
 
-    await axios
-      .post("http://localhost:5000/api/product", data)
+    await api
+      .post("/product", data)
       .then((response) =>
         setProductList([...productList, response.data.object])
       )
@@ -320,7 +316,7 @@ function App() {
   }
 
   async function removeProduct(id) {
-    await axios.delete("http://localhost:5000/api/product/" + id);
+    await api.delete("/product/" + id);
 
     const newArray = productList.filter((product) => product.id !== id);
     setProductList(newArray);
@@ -329,15 +325,15 @@ function App() {
   // Cart
 
   async function addToCart(id) {
-    await axios
-      .post("http://localhost:5000/api/user/cart", { productId: id })
+    await api
+      .post("/user/cart", { productId: id })
       .then((response) => setUserData(response.data.updatedUser))
       .catch((error) => console.log(error.response));
   }
 
   async function removeFromCart(id) {
-    await axios
-      .delete("http://localhost:5000/api/user/cart/" + id)
+    await api
+      .delete("/user/cart/" + id)
       .then((response) => setUserData(response.data.updatedUser))
       .catch((error) => console.log(error.response));
   }
@@ -356,8 +352,8 @@ function App() {
         const promises = [];
 
         for (let i = 0; i < orderListChargeIds.length; i++) {
-          const newRequest = axios.get(
-            "http://localhost:5000/api/payment/status/" + orderListChargeIds[i]
+          const newRequest = api.get(
+            "/payment/status/" + orderListChargeIds[i]
           );
 
           promises.push(newRequest);
@@ -388,7 +384,7 @@ function App() {
   }, [orderList]);
 
   async function getOrders() {
-    await axios.get("http://localhost:5000/api/order").then((response) =>
+    await api.get("/order").then((response) =>
       setOrderList({
         orders: response.data.events,
         page: response.data.page,

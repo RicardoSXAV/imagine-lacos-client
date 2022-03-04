@@ -6,8 +6,8 @@ import Box from "../../UI/Box";
 import Input from "../../UI/Input";
 import Button from "../../UI/Button";
 import Divider from "../../UI/Divider";
-import Image from "../../Image";
 import Icon from "../../Icon";
+import Image from "../../Image";
 
 function SignUpForm(props) {
   const [fullName, setFullName] = useState("");
@@ -24,16 +24,16 @@ function SignUpForm(props) {
   return (
     <>
       <Icon
-        name="top-logo-no-tie.png"
+        iconSrc="topLogo"
         id="sign-up-logo"
         onClick={() => history.push("/")}
       />
       <div className="sign-up-form">
-        <Image name="bow-tie.svg" id="sign-up-tie-icon" />
+        <Image imageSrc="bowTie" id="sign-up-tie-icon" />
         <Box id="sign-up-box">
           <h1 className="h1-form">Seja bem-vindo(a)!</h1>
           <Button>
-            <Icon name="google-button.png" id="sign-in-with-google-icon" />
+            <Icon iconSrc="googleButton" id="sign-in-with-google-icon" />
             Entrar com o Google
           </Button>
 

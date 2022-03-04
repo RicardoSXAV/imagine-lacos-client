@@ -1,5 +1,5 @@
 import "./styles.scss";
-import { useState } from "react";
+
 import Icon from "../../Icon";
 import Button from "../../UI/Button";
 
@@ -15,7 +15,7 @@ function FormWindow(props) {
         <div className="form-box-overflow">
           <h1 className="form-title">{props.title}</h1>
           <Icon
-            name="x-button.png"
+            iconSrc="xButton"
             id="form-x-button"
             onClick={() => props.setShowWindow(false)}
           />

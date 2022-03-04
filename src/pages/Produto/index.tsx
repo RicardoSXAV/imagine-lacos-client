@@ -68,9 +68,9 @@ function Produto(props) {
             </div>
             <div className="flex-wrapper-buttons">
               <Button
-                id="product-cart-button"
+                iconSrc="fullCartPlus"
                 buttonType="secondary"
-                iconName="full-cart-plus.png"
+                id="product-cart-button"
                 onClick={() => props.addToCart(product._id)}
               >
                 Carrinho

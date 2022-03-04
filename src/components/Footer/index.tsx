@@ -3,7 +3,6 @@ import "./styles.scss";
 import { Link } from "react-router-dom";
 
 import Icon from "../Icon";
-import { gmailIcon, instagramIcon, whatsappIcon } from "../../assets";
 
 function Footer() {
   return (
@@ -12,9 +11,9 @@ function Footer() {
         <h1>Redes Sociais</h1>
 
         <div className="footer-box-row">
-          <Icon src={whatsappIcon} />
+          <Icon iconSrc="whatsappIcon" />
           <a href="https://instagram.com/imagine_lacos">
-            <Icon src={instagramIcon} />
+            <Icon iconSrc="instagramIcon" />
           </a>
         </div>
       </div>
@@ -29,7 +28,7 @@ function Footer() {
       <div className="footer-box-column" id="contact-column">
         <h1>Contato</h1>
         <a href="mailto:imaginelacoss@gmail.com">
-          <Icon src={gmailIcon} />
+          <Icon iconSrc="gmailIcon" />
         </a>
         <h2>(61) 99863-1756</h2>
       </div>

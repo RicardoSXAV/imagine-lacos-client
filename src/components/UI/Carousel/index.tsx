@@ -15,13 +15,13 @@ function Carousel(props) {
     <>
       <div className="carousel">
         <Icon
+          iconSrc="prevButton"
           id="carousel-prev-button"
-          name="prev-button.png"
           onClick={scrollLeft}
         />
         <Icon
+          iconSrc="nextButton"
           id="carousel-next-button"
-          name="next-button.png"
           onClick={scrollRight}
         />
 
@@ -30,7 +30,7 @@ function Carousel(props) {
             <div className="carousel-card">
               {props.deletable && (
                 <Icon
-                  name="x-button.png"
+                  iconSrc="xButton"
                   id="carousel-card-delete"
                   onClick={() => props.deleteCard(image.key)}
                 />

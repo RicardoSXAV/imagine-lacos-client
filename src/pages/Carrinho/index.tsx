@@ -2,8 +2,8 @@ import "./styles.scss";
 
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 
+import { api } from "../../services/api";
 import priceFormatter from "../../utils/priceFormatter";
 
 import Navbar from "../../components/Navbar";
@@ -33,11 +33,9 @@ function Carrinho(props) {
 
   useEffect(() => {
     // Calcular o preço do frete
-    axios
-      .get("http://localhost:5000/api/order/shipping-price")
-      .then((response) => {
-        setShippingPrice(response.data.price);
-      });
+    api.get("/order/shipping-price").then((response) => {
+      setShippingPrice(response.data.price);
+    });
   }, []);
 
   const checkoutTotalAmount = checkoutProducts
@@ -84,14 +82,14 @@ function Carrinho(props) {
   }
 
   function handleBilletPayment() {
-    axios
-      .post("http://localhost:5000/api/payment/billet", {})
+    api
+      .post("/payment/billet", {})
       .then((response) => console.log(response))
       .catch((error) => console.log(error.message));
   }
 
   function handlePixPayment() {
-    axios.post("http://localhost:5000/api/payment/pix", {});
+    api.post("/payment/pix", {});
   }
 
   return (
@@ -119,7 +117,7 @@ function Carrinho(props) {
         )}
 
         {props.userData.cartList.map((product, index) => (
-          <div className="cart-product-card">
+          <div className="cart-product-card" key={index}>
             <img
               className="cart-product-image"
               src={product.productImage}
@@ -141,7 +139,7 @@ function Carrinho(props) {
               onValueChange={updateCheckoutProducts}
             />
             <Icon
-              name="x-button.png"
+              iconSrc="xButton"
               id="remove-cart-product-icon"
               onClick={() => props.removeFromCart(product.productId)}
             />
@@ -193,7 +191,7 @@ function Carrinho(props) {
           </div>
         ) : JSON.stringify(props.userData?.postalInformation) === "{}" ? (
           <div className="box-no-postal-info">
-            <Image name="bow-tie.svg" />
+            <Image imageSrc="bowTie" />
             <p>Você ainda não cadastrou seus dados postais.</p>
             <p>Clique abaixo para adicionar.</p>
             <Button
@@ -207,7 +205,7 @@ function Carrinho(props) {
           <div className="empty-cart-list-container">
             <Box id="empty-cart-box">
               <h1>Seu carrinho está vazio!</h1>
-              <Image name="gift-with-hearts.png" />
+              <Image imageSrc="giftWithHearts" />
               <Button
                 onClick={() => {
                   history.push("/");

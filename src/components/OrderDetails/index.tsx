@@ -17,7 +17,7 @@ function OrderDetails(props) {
 
         <div className="order-details-information-box">
           <div className="information-row">
-            <Image name="mailbox.png" id="mailbox-image" />
+            <Image imageSrc="mailBox" id="mailbox-image" />
             <strong>
               {props.orderDetails?.city}, {props.orderDetails?.state}
             </strong>
@@ -42,7 +42,7 @@ function OrderDetails(props) {
           </div>
         </div>
         <Icon
-          name="x-button.png"
+          iconSrc="xButton"
           id="order-details-x-button"
           onClick={() => props.setOrderDetails({})}
         />

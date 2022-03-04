@@ -1,19 +1,20 @@
 import "./style.scss";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
+
+import { api } from "../../services/api";
+import { useSessionStorage } from "../../hooks/useSessionStorage";
 
 import Icon from "../Icon";
 import UserOrderCard from "../UserOrderCard";
-import { useSessionStorage } from "../../hooks/useSessionStorage";
 
 function UserOrderList(props) {
   const [userOrders, setUserOrders] = useSessionStorage({}, "userOrders");
 
   async function getUserOrders() {
     if (JSON.stringify(userOrders) === "{}") {
-      await axios
-        .get("http://localhost:5000/api/order/user")
+      await api
+        .get("/order/user")
         .then((response) => {
           const data = response.data.orders;
 
@@ -40,8 +41,8 @@ function UserOrderList(props) {
     >
       <div className="user-order-list-box">
         <Icon
+          iconSrc="xButton"
           id="user-order-list-close"
-          name="x-button.png"
           onClick={() => props.setShowUserOrderList(false)}
         />
 
@@ -51,14 +52,14 @@ function UserOrderList(props) {
           <h2>Em andamento</h2>
         </div>
         {userOrders?.notCompleted?.map((order) => (
-          <UserOrderCard orderDetails={order.postalInformation} />
+          <UserOrderCard paymentMethod="test" />
         ))}
         <div className="completed-tag">
           <h2>Concluído</h2>
         </div>
       </div>
       {userOrders?.completed?.map((order) => (
-        <UserOrderCard />
+        <UserOrderCard paymentMethod="test" />
       ))}
       <div className="background-blur" />
     </div>

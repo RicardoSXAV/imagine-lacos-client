@@ -18,9 +18,9 @@ function ProductCard(props) {
     if (props.haveInCart === false) {
       return (
         <Icon
-          onClick={() => props.addToCart(props.id)}
+          iconSrc="plusButton"
           id="add-product-icon"
-          name="plus-button.png"
+          onClick={() => props.addToCart(props.id)}
         />
       );
     }
@@ -34,7 +34,7 @@ function ProductCard(props) {
     >
       {props.admin ? (
         <Icon
-          name="x-button.png"
+          iconSrc="xButton"
           id="remove-product-icon"
           onClick={() => props.remove(props.id)}
         />
@@ -63,7 +63,7 @@ function ProductCard(props) {
           <div className="product-quantity-circle">
             <h1>{props.quantity}</h1>
           </div>
-          <Icon name="edit-button.png" id="edit-product-icon" />
+          <Icon iconSrc="editButton" id="edit-product-icon" />
         </div>
       )}
     </div>

@@ -1,13 +1,19 @@
 import React from "react";
 import "./styles.scss";
 
-function Icon(
-  imageProps: React.DetailedHTMLProps<
-    React.ImgHTMLAttributes<HTMLImageElement>,
-    HTMLImageElement
-  >
-) {
-  return <img className="pressable-icon" {...imageProps} />;
+import Icons from "../../assets/icons";
+
+type IconProps = {
+  iconSrc?: keyof typeof Icons;
+} & React.DetailedHTMLProps<
+  React.ImgHTMLAttributes<HTMLImageElement>,
+  HTMLImageElement
+>;
+
+function Icon({ iconSrc, ...imageProps }: IconProps) {
+  return (
+    <img src={Icons[iconSrc]} className="pressable-icon" {...imageProps} />
+  );
 }
 
 export default Icon;
