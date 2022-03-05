@@ -48,11 +48,6 @@ function Input(props) {
   }
 
   function handleSelectClick(event) {
-    if (selectRef.current?.contains(event.target)) {
-      // inside click
-      return;
-    }
-
     setShowOptions(false);
   }
 
